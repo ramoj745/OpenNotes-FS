@@ -1,0 +1,54 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 14rem;
+    align-items: center;
+    position: relative;
+}
+.title-contents {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.custom-buttons {
+    height: 50px;
+    width: 18rem;
+}
+.content {
+    flex: 1;
+    height: 100%;
+}
+.icon-white {
+    filter: invert();
+}
+.icon-black :hover {
+    filter: invert();
+}
+.scrollable-jumbotron {
+    max-height: 530px;
+    overflow-y: auto;
+}
+  .card-text {
+    display: -webkit-box;         
+    -webkit-box-orient: vertical;        
+    -webkit-line-clamp: 2;                
+    overflow: hidden;                      
+    text-overflow: ellipsis;             
+}
+.bg-dark {
+    background-color: #14171A !important;
+}
+
+
