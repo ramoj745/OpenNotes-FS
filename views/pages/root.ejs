@@ -1,77 +1,114 @@
 <%- include("../partials/header.ejs") %>
 
-<body>
-    <div class="content">
-      <div class="scrollable-jumbotron d-flex flex-wrap justify-content-center p-5 gap-3">
-        <% posts.forEach(post => { %>
-        <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
-          <div class="card-header border-bottom"><%=post.createdAt%></div>
-          <div class="card-body">
-            <h5 class="card-title">By <%=post.userName%></h5>
-            <p class="card-text card-text"> <%=post.content%></p>
-            <!-- Post Buttons -->
-            <div class="buttons-container">
-              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#editModal-<%=post._id%>"><img src="/images/edit-svgrepo-com.svg" height="20px" class="icon-white"></button>
-              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#viewModal-<%=post._id%>">View</button>
-              <form action="/delete/<%=post._id%>?_method=DELETE" method="POST" class="d-inline">
-              <button type="submit" class="btn btn-danger border"><img src="/images/delete-svgrepo-com.svg" height="20px" class="icon-white"></button>
+<body class="poppins">
+  <div class="content img-bg">
+    <div class="scrollable-jumbotron d-flex flex-wrap justify-content-center p-5 gap-3">
+
+      <div class="card text-light mb-3" style="max-width: 18rem; background-color:#33322d;">
+        <div class="card-header border-bottom">Thu Oct 10 2024 02:55:25 GMT+0800 (China Standard Time)</div>
+        <div class="card-body">
+          <h5 class="card-title">Ram (Developer 💻)</h5>
+          <p class="card-text card-text">This is a place where you can freely express your thoughts and ideas. Whether you want to share a quick update, a random thought, or an interesting article, go ahead and click the "Create Post" button!<br>
+            Feel free to also leave comments about this project!
+          </p>
+          <!-- Post Buttons -->
+          <div class="buttons-container">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content text-light" style="background-color:#33322d;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Ram (Developer 💻)</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>This is a place where you can freely express your thoughts and ideas. Whether you want to share a quick update, a random thought, or an interesting article, go ahead and click the "Create Post" button! <br><br> Feel free to also leave comments about this project!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+      <% posts.forEach(post => { %>
+      <div class="card text-light mb-3" style="max-width: 18rem; background-color:#33322d;">
+        <div class="card-header border-bottom"><%=post.createdAt%></div>
+        <div class="card-body">
+          <h5 class="card-title">By <%=post.userName%></h5>
+          <p class="card-text card-text"> <%=post.content%></p>
+          <!-- Post Buttons -->
+          <div class="buttons-container">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#editModal-<%=post._id%>"><img src="/images/edit-svgrepo-com.svg" height="20px" class="icon-white"></button>
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#viewModal-<%=post._id%>">View</button>
+            <form action="/delete/<%=post._id%>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-dark"><img src="/images/delete-svgrepo-com.svg" height="20px" class="icon-white"></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Modal -->
+      <div class="modal fade" id="viewModal-<%=post._id%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content text-light" style="background-color:#33322d;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel"><%=post.userName%></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><%=post.content%></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Edit Modal -->
+      <div class="modal fade" id="editModal-<%=post._id%>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-light" style="background-color:#33322d;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Edit <%=post.userName%>'s Post</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/edit/<%=post._id%>?_method=PUT" method="POST" id="editForm-<%=post._id%>">
+                <div class="mb-3 d-flex flex-wrap">
+                  <label for="recipient-name" class="col-form-label">Edit User:</label>
+                  <input type="text" class="form-control img-bg" name="id">
+                </div>
+                <div class="mb-3 d-flex flex-wrap">
+                  <label for="message-text" class="col-form-label">Edit Content:</label>
+                  <textarea class="form-control img-bg" name="content"></textarea>
+                </div>
               </form>
             </div>
-          </div>
-        </div>
-
-        <!-- View Modal -->
-        <div class="modal fade" id="viewModal-<%=post._id%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content bg-dark text-light">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel"><%=post.userName%></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p><%=post.content%></p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-dark border" data-bs-dismiss="modal">Close</button>
-              </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+              <button type="submit" form="editForm-<%=post._id%>" class="btn btn-dark" ><img src="/images/send-2-svgrepo-com.svg" alt="Send Icon" class="icon-white" style="height: 1rem; width: auto;">
+              </button>
             </div>
           </div>
         </div>
-        <!-- Edit Modal -->
-        <div class="modal fade" id="editModal-<%=post._id%>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-light">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit <%=post.userName%>'s Post</h1>
-                <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form action="/edit/<%=post._id%>?_method=PUT" method="POST" id="editForm-<%=post._id%>">
-                  <div class="mb-3 d-flex flex-wrap">
-                    <label for="recipient-name" class="col-form-label">Edit User:</label>
-                    <input type="text" class="form-control bg-dark text-light" name="id">
-                  </div>
-                  <div class="mb-3 d-flex flex-wrap">
-                    <label for="message-text" class="col-form-label">Edit Content:</label>
-                    <textarea class="form-control bg-dark text-light" name="content"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-dark border" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="editForm-<%=post._id%>" class="btn btn-dark border" ><img src="/images/send-2-svgrepo-com.svg" alt="Send Icon" class="icon-white" style="height: 1rem; width: auto;">
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <% }) %>
       </div>
+      <% }) %>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   
 </body>
 
 <%- include("../partials/footer.ejs") %>

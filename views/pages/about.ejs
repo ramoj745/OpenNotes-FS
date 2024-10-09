@@ -1,8 +1,48 @@
-<%- include("../partials/header.ejs") %>
-
-<body>
-    <div class="content">
-        <p>haaaaa</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenNotes by Ram</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body class="poppins">
+    <div class="flex-container text-light border-bottom hf-color">
+        <div class="title-contents">
+            <h1 class="flex-title">OpenNotes</h1>
+            <form action="/" method="GET">
+                <button type="submit" class="btn btn-dark custom-buttons mx-3";>Back</button>
+            </form>
+        </div>
+    </div>
+    <div class="content img-bg d-flex">
+        <div class="container my-5">
+            <div class="p-5 text-center rounded-3">
+              <div class="tech-container d-flex flex-wrap justify-content-center align-items-center gap-3 mb-3">
+                <img src="/images/css-svgrepo-com.svg" class="svg-icon" height="80px">
+                <img src="/images/bootstrap-logo.svg" class="svg-icon" height="75px">
+                <img src="/images/javascript-svgrepo-com.svg" class="svg-icon" height="80px">
+                <img src="/images/express-svgrepo-com.svg" class="svg-icon" height="80px">
+                <img src="/images/nodejs-icon-svgrepo-com.svg" class="svg-icon" height="80px">
+                <img src="/images/mongodb-logo-svgrepo-com.svg" class="svg-icon" height="80px">
+              </div>
+              <h1 class="text-body-emphasis">This is my first full-stack web application 🙂</h1>
+              <p class="col-lg-8 mx-auto fs-5">
+                Made with ❤️ by ram
+              </p>
+              <div class="d-inline-flex gap-2 mb-5">
+                <form action="/" method="GET">
+                    <button class="d-inline-flex align-items-center btn btn-dark btn-lg px-4" type="submit">
+                    Start posting! ✍️
+                    </button>
+                </form>
+              </div>
+            </div>
+          </div>
     </div>
 </body>
 

@@ -34,8 +34,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/about", (req, res) => {
-    res.render("about")
-
+    res.render("pages/about.ejs")
 })
 
 app.post("/post", (req, res) => {
