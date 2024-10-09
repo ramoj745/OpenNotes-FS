@@ -1,77 +1,93 @@
 import bodyParser from "body-parser"
 import express from "express"
 import methodOverride from "method-override"
+import mongoose from "mongoose";
+import Post from "./models/userPost.js"
 
 
 const port = 3000;
 const app = express();
-let posts = [];
-let postCounter = 0
+
+// Database Connection
+const dbURI = "mongodb+srv://ramoj745:75369854123@cluster0.lnmir.mongodb.net/twtdb?retryWrites=true&w=majority&appName=Cluster0"
+mongoose.connect(dbURI)
+    .then (() => app.listen(port, () => {
+        console.log(`Connection Established at port ${port}`)
+    }) )
+    .catch((err) => console.log(err));
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-app.use(express.json());
 app.use(methodOverride('_method'));
 
 
 app.get("/", (req, res) => {
-    res.render("pages/root.ejs", {posts});
+    Post.find()
+    .then (posts => {
+        res.render("pages/root.ejs", {posts})
+    })
+    .catch (err => {
+        console.error(err)
+        res.status(500).send("Error retrieving posts.")
+    })
+})
+
+app.get("/about", (req, res) => {
+    res.render("about")
+
 })
 
 app.post("/post", (req, res) => {
     const content = req.body.content;
     const userName = req.body.id;
 
-    const newPost = {
-        postId: postCounter++,
+    const newPost = new Post({
         userName: userName,
         content: content,
-        createdAt: new Date(),
-    };
+    })
 
-    posts.push(newPost);
-    console.log(posts)
-
-    res.redirect('/');
-
-    const options = {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true, 
-        timeZoneName: 'short', 
-    };
-    
-    newPost.createdAt = newPost.createdAt.toLocaleString('en-US', options);
-
+    newPost.save()
+    .then (() => {
+        res.redirect("/")
+    })
+    .catch ((err) => {
+        console.error(err);
+        res.status(500).send("Error making post")
+    })
 })
 
 app.put("/edit/:id", (req, res) => {
-    const postId = parseInt(req.params.id);
+    const postId = req.params.id
     const userName = req.body.id;
     const content = req.body.content;
-    const post = posts.find(p => p.postId === postId);
 
-    post.userName = userName;
-    post.content = content;
-    console.log(`Post with ID ${postId} updated:`, post);
+    Post.findById(postId)
+    .then ((post) => {
+        post.userName = userName
+        post.content = content
 
-    res.redirect("/")
-
+        return post.save()
+    })
+    .catch ((err) => {
+        console.error(err);
+        res.send("Error finding post ID")
+    })
+    .then (() => {
+        res.redirect("/")
+    })
 })
 
 app.delete("/delete/:id", (req, res) => {
-    const postId = parseInt(req.params.id);
-    const postIndex = posts.findIndex(p => p.postId === postId);
+    const postId = req.params.id;
 
-    posts.splice(postIndex, 1)
-    console.log(`Post ID: ${postId} Removed`)
-
-    res.redirect("/")
-
-})
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
+    Post.findByIdAndDelete(postId)
+    .then(() => {
+        res.redirect("/")
+    })
+    .catch (err => {
+        console.error(err)
+    })
 })
 
 

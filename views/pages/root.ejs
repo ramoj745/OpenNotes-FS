@@ -11,9 +11,9 @@
             <p class="card-text card-text"> <%=post.content%></p>
             <!-- Post Buttons -->
             <div class="buttons-container">
-              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#editModal-<%=post.postId%>"><img src="/images/edit-svgrepo-com.svg" height="20px" class="icon-white"></button>
-              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#viewModal-<%=post.postId%>">View</button>
-              <form action="/delete/<%=post.postId%>?_method=DELETE" method="POST" class="d-inline">
+              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#editModal-<%=post._id%>"><img src="/images/edit-svgrepo-com.svg" height="20px" class="icon-white"></button>
+              <button type="button" class="btn btn-dark border" data-bs-toggle="modal" data-bs-target="#viewModal-<%=post._id%>">View</button>
+              <form action="/delete/<%=post._id%>?_method=DELETE" method="POST" class="d-inline">
               <button type="submit" class="btn btn-danger border"><img src="/images/delete-svgrepo-com.svg" height="20px" class="icon-white"></button>
               </form>
             </div>
@@ -21,7 +21,7 @@
         </div>
 
         <!-- View Modal -->
-        <div class="modal fade" id="viewModal-<%=post.postId%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="viewModal-<%=post._id%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content bg-dark text-light">
               <div class="modal-header">
@@ -32,13 +32,13 @@
                 <p><%=post.content%></p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark border" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
         </div>
         <!-- Edit Modal -->
-        <div class="modal fade" id="editModal-<%=post.postId%>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal-<%=post._id%>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark text-light">
               <div class="modal-header">
@@ -46,7 +46,7 @@
                 <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form action="/edit/<%=post.postId%>?_method=PUT" method="POST" id="editForm-<%=post.postId%>">
+                <form action="/edit/<%=post._id%>?_method=PUT" method="POST" id="editForm-<%=post._id%>">
                   <div class="mb-3 d-flex flex-wrap">
                     <label for="recipient-name" class="col-form-label">Edit User:</label>
                     <input type="text" class="form-control bg-dark text-light" name="id">
@@ -59,7 +59,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-dark border" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="editForm-<%=post.postId%>" class="btn btn-dark border" ><img src="/images/send-2-svgrepo-com.svg" alt="Send Icon" class="icon-white" style="height: 1rem; width: auto;">
+                <button type="submit" form="editForm-<%=post._id%>" class="btn btn-dark border" ><img src="/images/send-2-svgrepo-com.svg" alt="Send Icon" class="icon-white" style="height: 1rem; width: auto;">
                 </button>
               </div>
             </div>

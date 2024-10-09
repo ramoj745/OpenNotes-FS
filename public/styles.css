@@ -40,15 +40,12 @@ body {
     max-height: 530px;
     overflow-y: auto;
 }
-  .card-text {
+.card-text {
     display: -webkit-box;         
     -webkit-box-orient: vertical;        
     -webkit-line-clamp: 2;                
     overflow: hidden;                      
     text-overflow: ellipsis;             
-}
-.bg-dark {
-    background-color: #14171A !important;
 }
 
 
