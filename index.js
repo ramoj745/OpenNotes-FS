@@ -3,13 +3,14 @@ import express from "express"
 import methodOverride from "method-override"
 import mongoose from "mongoose";
 import Post from "./models/userPost.js"
+import { config } from 'dotenv';
 
-
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
+config();
 
-// Database Connection
-const dbURI = "mongodb+srv://ramoj745:75369854123@cluster0.lnmir.mongodb.net/twtdb?retryWrites=true&w=majority&appName=Cluster0"
+// Database Connection //
+const dbURI = process.env.DATABASE_URL;
 mongoose.connect(dbURI)
     .then (() => app.listen(port, () => {
         console.log(`Connection Established at port ${port}`)
