@@ -1,6 +1,6 @@
 # OpenNotes
 
-This project is a simple web application that allows users to post their thoughts and ideas, similar to how Twitter works. You can share what’s on your mind, see what others are posting, and even make changes to your own or others' posts. 
+This project is a simple full-stack application that allows users to post their thoughts and ideas, similar to how Twitter works. You can share what’s on your mind, see what others are posting, and even make changes to your own or others' posts. 
 
 ### Why a Twitter Clone?
 
