@@ -24,6 +24,7 @@ app.use(methodOverride('_method'));
 
 
 app.get("/", (req, res) => {
+    
     Post.find()
     .then (posts => {
         res.render("pages/root.ejs", {posts})
